@@ -8,16 +8,16 @@ import java.util.*;
 
 /** @pdOid 8e219823-44a3-44e7-b51a-61061a79cf44 */
 public class Cours {
-   /** @pdOid 6b4cdbc2-6548-4c62-8664-277d310957b4 */
-   public int idCours;
-   /** @pdOid c0e1157c-4c73-4cfb-b246-e4319b8fb34d */
-   public java.lang.String matiere;
-   /** @pdOid 9b54baa4-2ba9-4c50-a29a-932a35c232cd */
-   public boolean sport;
-   /** @pdOid 9c8f0dea-10db-497b-9355-4f28710b1816 */
-   public boolean labo;
-   /** @pdOid 9845e8d7-549d-45d9-b700-e28eafb4a6bb */
-   public boolean video;
+	 /** @pdOid 99316259-098d-42be-b585-2436edd40f85 */
+	   private int idCours;
+	   /** @pdOid 29363f6b-5ee1-483e-98b2-f7d935df515c */
+	   private java.lang.String matiere;
+	   /** @pdOid efc761f9-c637-48d7-9340-65575b1759ac */
+	   private boolean sport;
+	   /** @pdOid aaa98f94-16d2-4c13-86a6-f0e48c6a59aa */
+	   private boolean labo;
+	   /** @pdOid 5aab50b9-c194-4038-8c3e-913833c42ac7 */
+	   private boolean video;
 public int getIdCours() {
 	return idCours;
 }

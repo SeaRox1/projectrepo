@@ -8,12 +8,12 @@ import java.util.*;
 
 /** @pdOid af08190b-4999-4721-8e6d-6c156a65d147 */
 public class Etudier {
-	public int idClasseEtudier;
-	public int idSalleEtudier;
-	public java.lang.String nominationEtudier;
-	public int idCoursEtudier;
-	public java.lang.String matiereEtudier;
+	private int idClasseEtudier;
+	private int idSalleEtudier;	
+	private int idEnseignantEtudier;
+	private int idCoursEtudier;
 	private int idPeriodeEtudier;
+	
 	public int getIdClasseEtudier() {
 		return idClasseEtudier;
 	}
@@ -26,11 +26,11 @@ public class Etudier {
 	public void setIdSalleEtudier(int idSalleEtudier) {
 		this.idSalleEtudier = idSalleEtudier;
 	}
-	public java.lang.String getNominationEtudier() {
-		return nominationEtudier;
+	public int getIdEnseignantEtudier() {
+		return idEnseignantEtudier;
 	}
-	public void setNominationEtudier(java.lang.String nominationEtudier) {
-		this.nominationEtudier = nominationEtudier;
+	public void setIdEnseignantEtudier(int idEnseignantEtudier) {
+		this.idEnseignantEtudier = idEnseignantEtudier;
 	}
 	public int getIdCoursEtudier() {
 		return idCoursEtudier;
@@ -38,16 +38,12 @@ public class Etudier {
 	public void setIdCoursEtudier(int idCoursEtudier) {
 		this.idCoursEtudier = idCoursEtudier;
 	}
-	public java.lang.String getMatiereEtudier() {
-		return matiereEtudier;
-	}
-	public void setMatiereEtudier(java.lang.String matiereEtudier) {
-		this.matiereEtudier = matiereEtudier;
-	}
 	public int getIdPeriodeEtudier() {
 		return idPeriodeEtudier;
 	}
 	public void setIdPeriodeEtudier(int idPeriodeEtudier) {
 		this.idPeriodeEtudier = idPeriodeEtudier;
 	}
+	
+
 }

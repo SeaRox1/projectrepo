@@ -142,7 +142,7 @@ public void InsertPeriods(){
 	
 	}
 	public String getCoursClasse(int salle, int periode){
-		Vector v1=new Vector();
+		
 		Etudier ee1=new Etudier();
 		String q = null;
 
@@ -150,15 +150,16 @@ public void InsertPeriods(){
 			
 			st = cnx.createStatement();
 			rs=st.executeQuery("select * from etudier where id_salle="+salle+" and idPeriode="+periode);
-			 rs.next() ;
+			if( rs.next()) {
+			
 				ee1.setIdCoursEtudier(rs.getInt("id_cours"));
 				ee1.setIdClasseEtudier(rs.getInt("id_classe"));
-				v1.add(ee1);
+				
 				int a=ee1.getIdCoursEtudier();
 				int b=ee1.getIdClasseEtudier();
 				q="Cours "+ String.valueOf(a)+"Salle " +String.valueOf(b);
 			
-			
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

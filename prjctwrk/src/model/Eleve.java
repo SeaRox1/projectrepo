@@ -8,18 +8,18 @@ import java.util.*;
 
 /** @pdOid 95dac953-7991-4d46-b0a3-016b4214cc36 */
 public class Eleve {
-   /** @pdOid 72350890-62dc-4f8b-9ff1-9f30f5def653 */
-   public int idEleve;
-   /** @pdOid fccaec19-ba4a-40e5-b193-0e14155909df */
-   public java.lang.String nomEleve;
-   /** @pdOid f2966a59-af5f-4fa4-beba-32a8c21bccce */
-   public java.lang.String prenomEleve;
-   /** @pdOid 8cdd9278-0542-4f32-a1e0-290eb2a57d76 */
-   public java.util.Date dateDeNaissance;
-   /** @pdOid 63f52ae2-95c1-49ec-b659-1acfecd1f4eb */
-   public java.lang.String numTelephoneEleve;
-   /** @pdOid 87b0e997-d204-4dc9-9283-87880cddc90c */
-   public java.lang.String adresseEleve;
+	  /** @pdOid ee2a931c-75a3-46a4-97f1-5e2ff7d6f76b */
+	   private int idEleve;
+	   /** @pdOid 7b9f8924-ea26-499b-9eed-b050b82cfff1 */
+	   private java.lang.String nomEleve;
+	   /** @pdOid 546b451a-ecd2-4c78-aa0f-ec24a473bbe1 */
+	   private java.lang.String prenomEleve;
+	   /** @pdOid a19ec93e-16e3-469c-ae55-cc72d341700a */
+	   private java.util.Date dateDeNaissance;
+	   /** @pdOid 83db3d51-bfdd-4bc5-b8d1-dc383c9a901d */
+	   private java.lang.String numTelephoneEleve;
+	   /** @pdOid 5f079e36-761f-4e1b-ab7e-24ecb3a7511c */
+	   private java.lang.String adresseEleve;
 public int getIdEleve() {
 	return idEleve;
 }
