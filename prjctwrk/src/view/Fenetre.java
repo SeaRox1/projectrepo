@@ -17,6 +17,7 @@ import javax.swing.ButtonGroup;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.BoxLayout;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 import java.beans.PropertyChangeEvent;
 
 public class Fenetre {
@@ -207,7 +208,8 @@ connect conx=new connect();
 		        int col = table.columnAtPoint(evt.getPoint());
 		        if (row >= 0 && col >= 0) {
 			           System.out.println(row+"  "+col);
-			           
+			           Miniwindow miniwind= new Miniwindow(row, col);
+			           miniwind.setVisible(true);
 
 		        }
 		    }
@@ -215,6 +217,7 @@ connect conx=new connect();
 		
 		
 		frame.getContentPane().add(table);
+		
 		
 	}
 
