@@ -3,10 +3,11 @@ package prjctwrk;
 public class Main {
 
 	public static void main(String[] args) {
-	connect conn=new connect();
+	Connect conn=new Connect();
 	//conn.Add();
-	conn.FetchCells();
+	//conn.FetchCells();
 	//conn.InsertPeriods();
+	//conn.ListerClasses();
 	}
 
 }
