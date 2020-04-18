@@ -67,8 +67,36 @@ public class Miniwindow extends JFrame {
 		JComboBox comboBox_1 = new JComboBox(conx.ListerCours());
 		contentPane.add(comboBox_1);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("ajouter");
 		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String classe=String.valueOf(comboBox.getSelectedItem());
+				String coursEnseignant=String.valueOf(comboBox_1.getSelectedItem());
+
+				int realPeriode = 0;
+				if(jour=="Lundi")
+					realPeriode=colperiode;
+				if(jour=="Mardi")
+					realPeriode=colperiode+8;
+				if(jour=="Mercredi")
+					realPeriode=colperiode+16;
+				if(jour=="Jeudi")
+					realPeriode=colperiode+24;
+				if(jour=="Vendredi")
+					realPeriode=colperiode+32;
+				if(jour=="Samedi")
+					realPeriode=colperiode+40;
+					
+				System.out.println("button clicked  "+comboBox.getSelectedItem().toString()+"  "+comboBox_1.getSelectedItem());
+				conx.OccuperSallePeriode(classe, rowsalle, coursEnseignant, realPeriode);
+				Miniwindow.super.dispose();
+			}
+		});
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("vider");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int realPeriode = 0;
 				if(jour=="Lundi")
@@ -83,17 +111,11 @@ public class Miniwindow extends JFrame {
 					realPeriode=colperiode+32;
 				if(jour=="Samedi")
 					realPeriode=colperiode+40;
-				String classe=String.valueOf(comboBox.getSelectedItem());
-				String coursEnseignant=String.valueOf(comboBox_1.getSelectedItem());
-
-					
-					
-				System.out.println("button clicked  "+comboBox.getSelectedItem().toString()+"  "+comboBox_1.getSelectedItem());
-				conx.OccuperSallePeriode(classe, rowsalle, coursEnseignant, realPeriode);
+				conx.ViderOccupation(rowsalle, realPeriode);
 				Miniwindow.super.dispose();
 			}
 		});
-		contentPane.add(btnNewButton);
+		contentPane.add(btnNewButton_1);
 		
 		
 		System.out.println();

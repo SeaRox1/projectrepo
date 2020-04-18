@@ -126,20 +126,32 @@ public class Connect {
 	public String getCoursClasse(int salle, int periode) {
 
 		Etudier ee1 = new Etudier();
+		Enseigant ens= new Enseigant();
+		Classe cls=new Classe();
 		String q = null;
 
 		try {
 
 			st = cnx.createStatement();
-			rs = st.executeQuery("select * from etudier where id_salle=" + salle + " and idPeriode=" + periode);
+			rs = st.executeQuery("select  etudier.*, classe.niveau_scolaire, classe.numero, enseigant.nom_enseignant from etudier, classe, enseigant where id_salle=" + salle + " and idPeriode=" + periode+" and classe.id_classe=etudier.id_classe and enseigant.id_enseignant=etudier.id_enseignant");
+			
 			if (rs.next()) {
 
 				ee1.setIdCoursEtudier(rs.getInt("id_cours"));
 				ee1.setIdClasseEtudier(rs.getInt("id_classe"));
-
+				ens.setNomEnseignant(rs.getString("nom_enseignant"));
+				cls.setNiveauScolaire(rs.getInt("niveau_scolaire"));
+				cls.setNumero(rs.getInt("numero"));
+				
 				int a = ee1.getIdCoursEtudier();
 				int b = ee1.getIdClasseEtudier();
-				q = "Cours " + String.valueOf(a) + "Salle " + String.valueOf(b);
+				
+				int niveau=cls.getNiveauScolaire();
+				int numero=cls.getNumero();
+				String nomprof=ens.getNomEnseignant();
+				
+				//q = "Cours de " + nomprof + " Classe " + String.valueOf(niveau)+"ème "+numero;
+				q = nomprof + ", " + String.valueOf(niveau)+"ème "+numero;
 
 			}
 
@@ -164,12 +176,13 @@ public class Connect {
 			while (rs.next()) {
 				cc.setNiveauScolaire(rs.getInt("niveau_scolaire"));
 				cc.setNumero(rs.getInt("numero"));
+				x = cc.getNiveauScolaire() + "ème " + cc.getNumero();
+				y.add(x);
 				w.add(cc);
 			}
 			for (int i = 0; i < w.size(); i++) {
 				System.out.println(cc.getNumero());
-				x = cc.getNiveauScolaire() + "ème " + cc.getNumero();
-				y.add(x);
+				
 
 			}
 
@@ -192,7 +205,7 @@ public class Connect {
 		try {
 			st = cnx.createStatement();
 			rs = st.executeQuery(
-					"select cours.matiere, enseigant.nom_enseignant, enseigant.prenom_enseignant from cours, enseigant");
+					"select cours.matiere, enseigant.nom_enseignant, enseigant.prenom_enseignant from cours, enseigant where cours.id_enseignant=enseigant.id_enseignant");
 			while (rs.next()) {
 				co.setMatiere(rs.getString("matiere"));
 				tc.setNomEnseignant(rs.getString("nom_enseignant"));
@@ -228,17 +241,39 @@ public class Connect {
 		try {
 
 			st = cnx.createStatement();
+			rs = st.executeQuery("select  etudier.*, classe.niveau_scolaire, classe.numero, enseigant.nom_enseignant from etudier, classe, enseigant where id_salle=" + salle + " and idPeriode=" + periode+" and classe.id_classe=etudier.id_classe and enseigant.id_enseignant=etudier.id_enseignant");
+			if(rs.next()==true) {
+				st.executeUpdate("UPDATE etudier SET etudier.id_enseignant=( select enseigant.id_enseignant from enseigant where nom_enseignant='"+profNom+"'), etudier.id_cours=(select cours.id_cours from cours where cours.matiere='"+matiere+"'), etudier.id_classe=(select classe.id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+") WHERE idPeriode="+periode+" and id_salle="+salle);
+			}
+				else {
+					st.executeUpdate("UPDATE etudier SET etudier.id_enseignant=( select enseigant.id_enseignant from enseigant where nom_enseignant='"+profNom+"'), etudier.id_cours=(select cours.id_cours from cours where cours.matiere='"+matiere+"'), etudier.id_classe=(select classe.id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+") WHERE idPeriode="+periode+" and id_salle="+salle);
 			st.executeUpdate(
 					"insert into etudier (id_classe, id_salle, id_enseignant, id_cours, idPeriode) select classe.id_classe, salle.id_salle, enseigant.id_enseignant, cours.id_cours, periode.id_periode from classe, salle, enseigant, cours, periode where classe.niveau_scolaire="
 							+ niveau + " and classe.numero=" + numniveau + " and salle.nomination=" + salle
 							+ " and enseigant.nom_enseignant='" + profNom + "' and enseigant.prenom_enseignant='"
 							+ profPrenom + "' and cours.matiere='" + matiere + "' and periode.id_periode=" + periode);
+			
+
 			System.out.println("etudier entry entered");
+				}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+	public void ViderOccupation(int salle, int periode) {
+		try {
+
+			st = cnx.createStatement();
+			st.executeUpdate("delete from etudier where idPeriode="+periode+" and id_salle="+salle);
+			
+				}
+		 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

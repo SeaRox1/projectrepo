@@ -98,6 +98,13 @@ public class Fenetre {
 
 			}
 		}
+		for (int i = 1; i < table.getRowCount(); i++) {
+			table.setValueAt("Salle "+i, i, 0);
+		}
+		for (int j = 1; j < table.getColumnCount(); j++) {
+			table.setValueAt(j+7+":30", 0, j);
+
+		}
 		
 		JLabel label = new JLabel("");
 		
@@ -116,14 +123,15 @@ public class Fenetre {
 				JRadioButton rdbtnNewRadioButton = new JRadioButton("Lundi");
 				rdbtnNewRadioButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						for (int i = 0; i < table.getRowCount(); i++) {
+						for (int i = 1; i < table.getRowCount(); i++) {
 
-							for (int j = 0; j < table.getColumnCount(); j++) {
+							for (int j = 1; j < table.getColumnCount(); j++) {
 								table.setValueAt(conx.getCoursClasse(i, j), i, j);
 								table.isCellEditable(i, j);
 
 							}
 						}
+						
 						table.setValueAt("yeet", 0, 0);
 					}
 				});
@@ -136,15 +144,22 @@ public class Fenetre {
 		rdbtnNewRadioButton_1.setActionCommand("Mardi");
 		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < table.getRowCount(); i++) {
+				for (int i = 1; i < table.getRowCount(); i++) {
 
-					for (int j = 0; j < table.getColumnCount(); j++) {
+					for (int j = 1; j < table.getColumnCount(); j++) {
 						table.setValueAt(conx.getCoursClasse(i, j + 8), i, j);
 						table.isCellEditable(i, j);
 
 					}
 				}
+				for (int i = 1; i < table.getRowCount(); i++) {
+					table.setValueAt("Salle "+i, i, 0);
+				}
+				for (int j = 1; j < table.getColumnCount(); j++) {
+					table.setValueAt(j+7+":30", 0, j);
 
+				}
+				
 			}
 		});
 
@@ -153,15 +168,15 @@ public class Fenetre {
 		rdbtnNewRadioButton_2.setActionCommand("Mercredi");
 		rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < table.getRowCount(); i++) {
+				for (int i = 1; i < table.getRowCount(); i++) {
 
-					for (int j = 0; j < table.getColumnCount(); j++) {
+					for (int j = 1; j < table.getColumnCount(); j++) {
 						table.setValueAt(conx.getCoursClasse(i, j + 16), i, j);
 						table.isCellEditable(i, j);
 
 					}
 				}
-
+				
 			}
 		});
 
@@ -170,15 +185,15 @@ public class Fenetre {
 		rdbtnNewRadioButton_3.setActionCommand("Jeudi");
 		rdbtnNewRadioButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < table.getRowCount(); i++) {
+				for (int i = 1; i < table.getRowCount(); i++) {
 
-					for (int j = 0; j < table.getColumnCount(); j++) {
+					for (int j = 1; j < table.getColumnCount(); j++) {
 						table.setValueAt(conx.getCoursClasse(i, j + 24), i, j);
 						table.isCellEditable(i, j);
 
 					}
 				}
-
+				
 			}
 		});
 
@@ -187,15 +202,15 @@ public class Fenetre {
 		rdbtnNewRadioButton_4.setActionCommand("Vendredi");
 		rdbtnNewRadioButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < table.getRowCount(); i++) {
+				for (int i = 1; i < table.getRowCount(); i++) {
 
-					for (int j = 0; j < table.getColumnCount(); j++) {
+					for (int j = 1; j < table.getColumnCount(); j++) {
 						table.setValueAt(conx.getCoursClasse(i, j + 32), i, j);
 						table.isCellEditable(i, j);
 
 					}
 				}
-
+				
 			}
 		});
 
@@ -213,15 +228,15 @@ public class Fenetre {
 //				tcm.removeColumn( tcm.getColumn(6) );
 //				tcm.removeColumn( tcm.getColumn(5) );
 
-				for (int i = 0; i < table.getRowCount(); i++) {
-					for (int j = 0; j < table.getColumnCount(); j++) {
+				for (int i = 1; i < table.getRowCount(); i++) {
+					for (int j = 1; j < table.getColumnCount(); j++) {
 						table.setValueAt(conx.getCoursClasse(i, j + 40), i, j);
 						table.isCellEditable(i, j);
 
 					}
 
 				}
-
+				
 				// table.removeColumn(table.getColumnModel().getColumn(8));
 
 			}
@@ -233,7 +248,7 @@ public class Fenetre {
 				int row = table.rowAtPoint(evt.getPoint());
 				int col = table.columnAtPoint(evt.getPoint());
 				String jour = buttonGroup.getSelection().getActionCommand();
-				if (row >= 0 && col >= 0) {
+				if (row >= 1 && col >= 1) {
 					System.out.println(row + "  " + col);
 					Miniwindow miniwind = new Miniwindow(row, col, jour);
 					miniwind.setVisible(true);
