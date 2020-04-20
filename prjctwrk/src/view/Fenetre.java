@@ -29,9 +29,9 @@ import javax.swing.GroupLayout.Alignment;
 
 public class Fenetre {
 	Connect conx = new Connect();
-	private JFrame frame;
-	private JTable table;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	 JFrame frame;
+	 JTable table;
+	final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.

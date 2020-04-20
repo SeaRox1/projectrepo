@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import prjctwrk.Connect;
 
 import java.awt.FlowLayout;
+
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -99,7 +102,14 @@ public class Miniwindow extends JFrame {
 				}
 				else {
 					conx.OccuperSallePeriode(classe, rowsalle, coursEnseignant, realPeriode);
-					
+					String j= f.buttonGroup.getSelection().getActionCommand();
+					ButtonModel o=  f.buttonGroup.getSelection();
+					f.buttonGroup.clearSelection();
+					f.buttonGroup.setSelected(o, true);
+					System.out.println(" miniwindow btngroup getselection "+f.buttonGroup.getSelection().getActionCommand());
+				
+					//f.buttonGroup.getSelection().setPressed(true);
+
 					Miniwindow.super.dispose();
 
 				}
