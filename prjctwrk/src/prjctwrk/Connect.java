@@ -246,13 +246,15 @@ public class Connect {
 				st.executeUpdate("UPDATE etudier SET etudier.id_enseignant=( select enseigant.id_enseignant from enseigant where nom_enseignant='"+profNom+"'), etudier.id_cours=(select cours.id_cours from cours where cours.matiere='"+matiere+"'), etudier.id_classe=(select classe.id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+") WHERE idPeriode="+periode+" and id_salle="+salle);
 			}
 				else {
-					st.executeUpdate("UPDATE etudier SET etudier.id_enseignant=( select enseigant.id_enseignant from enseigant where nom_enseignant='"+profNom+"'), etudier.id_cours=(select cours.id_cours from cours where cours.matiere='"+matiere+"'), etudier.id_classe=(select classe.id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+") WHERE idPeriode="+periode+" and id_salle="+salle);
-			st.executeUpdate(
-					"insert into etudier (id_classe, id_salle, id_enseignant, id_cours, idPeriode) select classe.id_classe, salle.id_salle, enseigant.id_enseignant, cours.id_cours, periode.id_periode from classe, salle, enseigant, cours, periode where classe.niveau_scolaire="
-							+ niveau + " and classe.numero=" + numniveau + " and salle.nomination=" + salle
-							+ " and enseigant.nom_enseignant='" + profNom + "' and enseigant.prenom_enseignant='"
-							+ profPrenom + "' and cours.matiere='" + matiere + "' and periode.id_periode=" + periode);
-			
+					//st.executeUpdate("UPDATE etudier SET etudier.id_enseignant=( select enseigant.id_enseignant from enseigant where nom_enseignant='"+profNom+"'), etudier.id_cours=(select cours.id_cours from cours where cours.matiere='"+matiere+"'), etudier.id_classe=(select classe.id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+") WHERE idPeriode="+periode+" and id_salle="+salle);
+//			st.executeUpdate(
+//					"insert into etudier (id_classe, id_salle, id_enseignant, id_cours, idPeriode) select classe.id_classe, salle.id_salle, enseigant.id_enseignant, cours.id_cours, periode.id_periode from classe, salle, enseigant, cours, periode where classe.niveau_scolaire="
+//							+ niveau + " and classe.numero=" + numniveau + " and salle.nomination=" + salle
+//							+ " and enseigant.nom_enseignant='" + profNom + "' and enseigant.prenom_enseignant='"
+//							+ profPrenom + "' and cours.matiere='" + matiere + "' and periode.id_periode=" + periode);
+//			
+			st.executeUpdate("insert into etudier (id_classe, id_salle, id_enseignant, id_cours, idPeriode) select ( select classe.id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+"), ( select salle.id_salle from salle where salle.nomination=+"+salle+"), ( select enseigant.id_enseignant from enseigant where enseigant.nom_enseignant='"+profNom+"' and enseigant.prenom_enseignant='"+profPrenom+"'), ( select cours.id_cours from cours where cours.matiere='"+matiere+"'), ( select periode.id_periode from periode where periode.id_periode="+periode+")");
+					
 
 			System.out.println("etudier entry entered");
 				}
@@ -276,4 +278,38 @@ public class Connect {
 		
 	}
 
+	public boolean CheckForTeacherAndClassAvailability(String classe, String coursEnseignant, int periode) {
+
+		boolean mechghoul;
+		
+		String matiere = coursEnseignant.substring(0, coursEnseignant.indexOf(","));
+		String profNom = coursEnseignant.substring(coursEnseignant.indexOf(",") + 2, coursEnseignant.lastIndexOf(" "));
+		String profPrenom = coursEnseignant.substring(coursEnseignant.lastIndexOf(" ") + 1, coursEnseignant.length());
+
+		String niveau = classe.substring(0, 1);
+		String numniveau = classe.substring(classe.lastIndexOf(" ") + 1);
+		
+		try {
+			st = cnx.createStatement();
+			rs = st.executeQuery("select * from etudier where idPeriode="+periode+" and (etudier.id_classe=( select id_classe from classe where classe.niveau_scolaire="+niveau+" and classe.numero="+numniveau+" ) or  etudier.id_enseignant=( select id_enseignant from enseigant where enseigant.nom_enseignant='"+profNom+"' and enseigant.prenom_enseignant='"+profPrenom+"'))");
+			if(rs.next()==true) {
+				System.err.println("Prof et/ou classe dèja occupé dans cette période et jour");
+				mechghoul=true;
+			}
+			else {
+				mechghoul=false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mechghoul=false;
+			
+		}
+		return mechghoul;
+		
+		
+		
+		
+	}
 }

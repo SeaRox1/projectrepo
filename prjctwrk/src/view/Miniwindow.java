@@ -13,13 +13,15 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Miniwindow extends JFrame {
 
 	Connect conx=new Connect();
-
+	Fenetre f;
 	private JPanel contentPane;
 	
 
@@ -42,7 +44,8 @@ public class Miniwindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Miniwindow(int rowsalle, int colperiode, String jour) {
+	public Miniwindow(int rowsalle, int colperiode, String jour, Fenetre v) {
+		f=v;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -89,8 +92,17 @@ public class Miniwindow extends JFrame {
 					realPeriode=colperiode+40;
 					
 				System.out.println("button clicked  "+comboBox.getSelectedItem().toString()+"  "+comboBox_1.getSelectedItem());
-				conx.OccuperSallePeriode(classe, rowsalle, coursEnseignant, realPeriode);
-				Miniwindow.super.dispose();
+				if(conx.CheckForTeacherAndClassAvailability(classe, coursEnseignant, realPeriode)==true) {
+					System.err.println("placeholder for new small teacher and or class occupied at that time window");
+					
+					JOptionPane.showMessageDialog(rootPane, "Prof et/ou classe dèjà occupé dans cette période de ce jour.");
+				}
+				else {
+					conx.OccuperSallePeriode(classe, rowsalle, coursEnseignant, realPeriode);
+					
+					Miniwindow.super.dispose();
+
+				}
 			}
 		});
 		contentPane.add(btnNewButton);

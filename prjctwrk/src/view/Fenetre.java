@@ -59,9 +59,9 @@ public class Fenetre {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 20, 960, 720);
+		frame.setBounds(20, 20, 1120, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		table = new JTable(21, 9) {
@@ -75,7 +75,7 @@ public class Fenetre {
 		for (int i = 0; i < table.getColumnCount(); i++) {
 		    column = table.getColumnModel().getColumn(i);
 		
-		        column.setPreferredWidth(100);
+		        column.setPreferredWidth(120);
 		  
 		}
 		table.setValueAt("yeet", 0, 0);
@@ -100,12 +100,24 @@ public class Fenetre {
 		}
 		for (int i = 1; i < table.getRowCount(); i++) {
 			table.setValueAt("Salle "+i, i, 0);
+			if(i==17 || i== 16) {
+				table.setValueAt("Salle de laboratoire "+i, i, 0);
+			}
+			if(i==18 || i== 19) {
+				table.setValueAt("Salle de video proj "+i, i, 0);
+			}
+			if(i==20) {
+				table.setValueAt("Salle de Sport "+i, i, 0);
+			}
 		}
-		for (int j = 1; j < table.getColumnCount(); j++) {
+		for (int j = 1; j < 6; j++) {
 			table.setValueAt(j+7+":30", 0, j);
 
 		}
-		
+		for (int j = 4; j < 9; j++) {
+			table.setValueAt(j+9+":30", 0, j);
+
+		}
 		JLabel label = new JLabel("");
 		
 		JLabel label_1 = new JLabel("");
@@ -250,7 +262,7 @@ public class Fenetre {
 				String jour = buttonGroup.getSelection().getActionCommand();
 				if (row >= 1 && col >= 1) {
 					System.out.println(row + "  " + col);
-					Miniwindow miniwind = new Miniwindow(row, col, jour);
+					Miniwindow miniwind = new Miniwindow(row, col, jour, Fenetre.this);
 					miniwind.setVisible(true);
 
 				}
