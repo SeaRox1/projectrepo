@@ -61,7 +61,7 @@ public class Fenetre {
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(20, 20, 1120, 720);
+		frame.setBounds(20, 20, 1120, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		table = new JTable(21, 9) {
@@ -110,12 +110,12 @@ public class Fenetre {
 				table.setValueAt("Salle de Sport "+i, i, 0);
 			}
 		}
-		for (int j = 1; j < 6; j++) {
-			table.setValueAt(j+7+":30", 0, j);
+		for (int j = 1; j < 5; j++) {
+			table.setValueAt(j+7+":30 - "+(j+8)+":30", 0, j);
 
 		}
-		for (int j = 4; j < 9; j++) {
-			table.setValueAt(j+9+":30", 0, j);
+		for (int j = 5; j < 9; j++) {
+			table.setValueAt(j+9+":30 - "+(j+10)+":30", 0, j);
 
 		}
 		JLabel label = new JLabel("");

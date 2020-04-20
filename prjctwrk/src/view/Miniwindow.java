@@ -70,7 +70,7 @@ public class Miniwindow extends JFrame {
 		JComboBox comboBox_1 = new JComboBox(conx.ListerCours());
 		contentPane.add(comboBox_1);
 		
-		JButton btnNewButton = new JButton("ajouter");
+		JButton btnNewButton = new JButton("remplir");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
